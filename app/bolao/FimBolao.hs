@@ -9,3 +9,6 @@ type Gols = Int
 data Sala = Sala Nome TimeCasa TimeFora Senha SenhaAdmin deriving (Show)
 
 data Palpite = Palpite Nome Senha Usuario Gols Gols deriving (Show)
+
+criarSala :: Sala -> [Char]
+criarSala x = "Sala criada com sucesso!"
