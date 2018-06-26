@@ -16,3 +16,9 @@ Comment json -- Adding "json" causes ToJSON and FromJSON instances to be derived
     userId UserId Maybe
     deriving Eq
     deriving Show
+Palpite json
+    timeA Text
+    golsA Int
+    timeB Text
+    golsB Int
+    userId UserId Maybe

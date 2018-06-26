@@ -12,3 +12,5 @@
 /comments CommentR POST
 
 /profile ProfileR GET
+/bolao BolaoR GET POST
+/palpite PalpiteR GET POST
