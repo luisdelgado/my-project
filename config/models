@@ -21,4 +21,5 @@ Palpite json
     golsA Int
     timeB Text
     golsB Int
-    userId UserId Maybe
+    user UserId
+    userName Text

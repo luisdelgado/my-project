@@ -2,8 +2,7 @@
     $forall palpite <- palpites
         <div .bs-callout.bs-callout-info>
             <small>
-                #{palpiteTimeA $ entityVal palpite}  #{palpiteGolsA $ entityVal palpite}X#{palpiteGolsB $ entityVal palpite}  #{palpiteTimeB $ entityVal palpite}
-                #{show $ palpiteUserId $ entityVal palpite}
+                #{palpiteTimeA $ entityVal palpite}  #{palpiteGolsA $ entityVal palpite}X#{palpiteGolsB $ entityVal palpite}  #{palpiteTimeB $ entityVal palpite}  #{palpiteUserName $ entityVal palpite}
 
 <div .col-lg-4.col-lg-offset-1>
     <div .bs-callout.bs-callout-info>

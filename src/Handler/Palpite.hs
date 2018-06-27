@@ -13,8 +13,9 @@ import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
 
 getPalpiteR :: Handler Html
 getPalpiteR = do
+    (userId, user) <- requireAuthPair
     palpites <- runDB $ selectList [] [Asc PalpiteId]
-    (palpiteWidget, enctype) <- generateFormPost entryForm
+    (palpiteWidget, enctype) <- generateFormPost (entryForm userId (userIdent user))
     defaultLayout $ do
         setTitle "Palpites"
         $(widgetFile "palpites")
@@ -22,12 +23,12 @@ getPalpiteR = do
 
 postPalpiteR :: Handler Html
 postPalpiteR = do
-    maybeCurrentUserId <- maybeAuthId
-    ((res,palpiteWidget),enctype) <- runFormPost entryForm
+    (userId, user) <- requireAuthPair
+    ((res,palpiteWidget),enctype) <- runFormPost (entryForm userId (userIdent user))
     case res of
         FormSuccess palpite -> do
-           let palpite' = palpite { palpiteUserId = maybeCurrentUserId }
-           palpiteId <- runDB $ insert palpite'
+           --let palpite' = palpite { palpiteUser = userId, palpiteUserName = (userIdent user) }
+           palpiteId <- runDB $ insert palpite
            setMessage "Palpite criado"
            redirect PalpiteR
         _ -> do
@@ -42,10 +43,11 @@ createSettigs str = FieldSettings
         ]
     }
 
-entryForm :: Form Palpite
-entryForm = renderBootstrap3 BootstrapBasicForm $ Palpite
+entryForm :: UserId -> Text -> Form Palpite
+entryForm userId userName= renderBootstrap3 BootstrapBasicForm $ Palpite
     <$> areq   textField (createSettigs "Time da casa") Nothing
     <*> areq   intField (createSettigs "Gols Time da casa") Nothing
     <*> areq   textField (createSettigs "Visitante") Nothing
     <*> areq   intField (createSettigs "Gols Visitante") Nothing
-    <*> aopt   hiddenField "userId" Nothing
+    <*> pure userId
+    <*> pure userName
