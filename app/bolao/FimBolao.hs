@@ -17,7 +17,11 @@ criarPalpite :: [Palpite] -> Palpite -> [Palpite]
 criarPalpite x y = x ++ [y]
 
 fimBolao :: [Sala] -> [Palpite] -> [Char] -> [Char] -> Int -> Int -> [([Char],[Char])]
-fimBolao (x:xs) (y:ys) nomeSala senhaAdmin golsCasa golsFora =
- if "teste" == "teste"
- then ("Sala certa", "ok"):fimBolao xs ys nomeSala senhaAdmin golsCasa golsFora
- else [("Erro", "Erro")]
+fimBolao [] _ _ _ _ _ = [("Sala não encontrada!", "Tente novamente!")]
+fimBolao _ [] _ _ _ _ = [("Fim do Bolão!", "Agradecemos a sua participação.")]
+fimBolao ((Sala a b c d e):xs) ((Palpite f g h i j):ys) nomeSala senhaAdmin golsCasa golsFora =
+ if a == nomeSala && e == senhaAdmin
+ then if i == golsCasa && j == golsFora
+      then (h, "Acertou!"): fimBolao ((Sala a b c d e):xs) ys nomeSala senhaAdmin golsCasa golsFora
+      else (h, "Errou!"): fimBolao ((Sala a b c d e):xs) ys nomeSala senhaAdmin golsCasa golsFora
+ else fimBolao xs ((Palpite f g h i j):ys) nomeSala senhaAdmin golsCasa golsFora
