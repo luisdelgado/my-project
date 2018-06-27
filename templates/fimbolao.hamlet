@@ -1,0 +1,5 @@
+<div .col-lg-4.col-lg-offset-1>
+    $forall palpite <- palpites
+        <div .bs-callout.bs-callout-info>
+            <small>
+                #{palpiteUserName $ entityVal palpite}
