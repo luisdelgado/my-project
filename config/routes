@@ -12,3 +12,6 @@
 /comments CommentR POST
 
 /profile ProfileR GET
+/bolao BolaoR GET POST
+/bolao/#BolaoId SBolaoR GET POST
+/fimbolao/#BolaoId FimBolaoR POST

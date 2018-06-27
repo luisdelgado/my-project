@@ -1,0 +1,13 @@
+<div .col-lg-4.col-lg-offset-1>
+    $forall Entity bolaoid bolao <- boloes
+        <a href=@{SBolaoR bolaoid}>
+            <div .bs-callout.bs-callout-info>
+                <small>
+                    #{bolaoNome bolao} _Times #{bolaoCasa bolao} X #{bolaoVisitante bolao}
+
+<div .col-lg-4.col-lg-offset-1>
+    <div .bs-callout.bs-callout-info>
+        <form .form-horizontal method=post enctype=#{enctype}>
+            ^{bolaoWidget}
+            <div>
+                <input .btn.btn-primary type=submit value="Criar Bolão">
