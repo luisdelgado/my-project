@@ -7,6 +7,8 @@ module Handler.Palpite where
 
 import Import
 import Yesod.Form.Bootstrap3 (BootstrapFormLayout (..), renderBootstrap3)
+import Database.Persist.Sql
+
 
 --import Yesod.Form.Nic (YesodNic, nicHtmlField)
 --instance YesodNic App
@@ -49,3 +51,9 @@ entryForm = renderBootstrap3 BootstrapBasicForm $ Palpite
     <*> areq   textField (createSettigs "Visitante") Nothing
     <*> areq   intField (createSettigs "Gols Visitante") Nothing
     <*> aopt   hiddenField "userId" Nothing
+
+
+
+fromJust :: Maybe a -> a
+fromJust Nothing = error "Maybe.fromJust: Nothing"
+fromJust (Just x) = x

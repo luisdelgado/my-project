@@ -1,4 +1,4 @@
-h2##{aDomId} {
+h2 {
     color: #990
 }
 
@@ -7,7 +7,11 @@ li {
     font-size: 16px
 }
 
-##{commentTextareaId} {
+textarea {
     width: 400px;
     height: 100px;
+}
+
+body {
+    background-color: #0B0C0D;
 }
