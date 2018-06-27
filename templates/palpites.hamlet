@@ -1,0 +1,12 @@
+<div .col-lg-4.col-lg-offset-1>
+    $forall palpite <- palpites
+        <div .bs-callout.bs-callout-info>
+            <small>
+                #{palpiteGolsA $ entityVal palpite}X#{palpiteGolsB $ entityVal palpite} #{palpiteUserName $ entityVal palpite}
+
+<div .col-lg-4.col-lg-offset-1>
+    <div .bs-callout.bs-callout-info>
+        <form .form-horizontal method=post enctype=#{enctype}>
+            ^{palpiteWidget}
+            <div>
+                <input .btn.btn-primary type=submit value="Criar palpite">

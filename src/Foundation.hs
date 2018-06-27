@@ -19,7 +19,7 @@ import Control.Monad.Logger (LogSource)
 -- Used only when in "auth-dummy-login" setting is enabled.
 import Yesod.Auth.Dummy
 
-import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
+--import Yesod.Auth.OpenId    (authOpenId, IdentifierType (Claimed))
 import Yesod.Default.Util   (addStaticContentExternal)
 import Yesod.Core.Types     (Logger)
 import qualified Yesod.Core.Unsafe as Unsafe
@@ -116,8 +116,8 @@ instance Yesod App where
                     , menuItemAccessCallback = True
                     }
                 , NavbarLeft $ MenuItem
-                    { menuItemLabel = "Profile"
-                    , menuItemRoute = ProfileR
+                    { menuItemLabel = "Bolões"
+                    , menuItemRoute = BolaoR
                     , menuItemAccessCallback = isJust muser
                     }
                 , NavbarRight $ MenuItem
@@ -170,6 +170,8 @@ instance Yesod App where
     -- the profile route requires that the user is authenticated, so we
     -- delegate to that function
     isAuthorized ProfileR _ = isAuthenticated
+    isAuthorized BolaoR _ = isAuthenticated
+    isAuthorized (SBolaoR _) _ = isAuthenticated
 
     -- This function creates static content files in the static folder
     -- and names them based on a hash of their content. This allows
@@ -217,7 +219,7 @@ instance YesodBreadcrumbs App where
         -> Handler (Text, Maybe (Route App))
     breadcrumb HomeR = return ("Home", Nothing)
     breadcrumb (AuthR _) = return ("Login", Just HomeR)
-    breadcrumb ProfileR = return ("Profile", Just HomeR)
+    breadcrumb ProfileR = return ("Bolões", Just BolaoR)
     breadcrumb  _ = return ("home", Nothing)
 
 -- How to run database actions.
@@ -258,7 +260,7 @@ instance YesodAuth App where
 
     -- You can add other plugins like Google Email, email or OAuth here
     authPlugins :: App -> [AuthPlugin App]
-    authPlugins app = [authOpenId Claimed []] ++ extraAuthPlugins
+    authPlugins app = extraAuthPlugins --[authOpenId Claimed []] ++ extraAuthPlugins
         -- Enable authDummy login if enabled.
         where extraAuthPlugins = [authDummy | appAuthDummyLogin $ appSettings app]
 
